@@ -47,6 +47,7 @@ include(GNUInstallDirs)
 
 option(BUILD_CUDA, "Compile CUDA wrappers for LArNEST" OFF)
 if(BUILD_CUDA)
+  list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cuda")
   enable_language(CUDA)
   if(NOT DEFINED CMAKE_CUDA_STANDARD)
     set(CMAKE_CUDA_STANDARD 11)
@@ -186,3 +187,11 @@ export(
 # Register package in user's package registry
 set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
 export(PACKAGE LArNEST)
+
+if(BUILD_CUDA)
+  add_library(LArNESTCUDA SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/LArNEST.cu)
+  target_link_libraries(LArNESTCUDA PUBLIC
+    cudart
+  )
+  set_target_properties(LArNESTCUDA PROPERTIES PREFIX "")
+endif()
