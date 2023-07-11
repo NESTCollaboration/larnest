@@ -15,7 +15,7 @@
 #include <mutex>
 #include <ctime>
 #include <cstring>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <iostream>
 #include <sys/stat.h>
 #include <sys/types.h>
