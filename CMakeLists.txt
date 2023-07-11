@@ -41,6 +41,34 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 include(GNUInstallDirs)
 # include(CMakePackageConfigHelpers)
 
+#-------------------------------------------------------------------#
+# Cuda and Python configuration
+#-------------------------------------------------------------------#
+
+option(BUILD_CUDA, "Compile CUDA wrappers for LArNEST" OFF)
+if(BUILD_CUDA)
+  enable_language(CUDA)
+  if(NOT DEFINED CMAKE_CUDA_STANDARD)
+    set(CMAKE_CUDA_STANDARD 11)
+    set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+  endif()
+
+  # we also need extra stuff to make sure compile flags are correctly
+  # passed to nvcc / host compiler
+  include(protect_nvcc_flags)
+  include(protect_pthread_flag)
+  message("  CUDA compiler ID      : ${CMAKE_CUDA_COMPILER_ID}")
+  message("  CUDA compiler Version : ${CMAKE_CUDA_COMPILER_VERSION}")
+  message("  C++ Compiler : ${CMAKE_CXX_COMPILER_ID} "
+    "${CMAKE_CXX_COMPILER_VERSION} "
+    "${CMAKE_CXX_COMPILER_WRAPPER}")
+  message("    ${CMAKE_CXX_COMPILER}")
+  message("  CUDA Compiler      : ${CMAKE_CUDA_COMPILER}")
+  message("  CUDA Compiler exec : ${CUDA_NVCC_EXECUTABLE}")
+  message("  CUDA Compile flags : ${CMAKE_CUDA_FLAGS}")
+  message("  CUDA toolkit inc   : ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+endif()
+
 set(LArNEST_CORE_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/LArNEST.cxx
   ${CMAKE_CURRENT_SOURCE_DIR}/src/Logger.cxx
