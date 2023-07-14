@@ -1,6 +1,6 @@
 
 # Set minimum CMake version required and prevent building in source
-cmake_minimum_required(VERSION 3.8...3.16 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 ###############        Get version from git        #####################
 execute_process(COMMAND git describe --tag
@@ -54,6 +54,7 @@ if(BUILD_CUDA)
     message("Using cmake policy CMP0104 NEW")
     cmake_policy(SET CMP0104 NEW)
   endif()
+  set(CMAKE_CUDA_ARCHITECTURE '75')
   list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cuda")
   enable_language(CUDA)
   if(NOT DEFINED CMAKE_CUDA_STANDARD)
