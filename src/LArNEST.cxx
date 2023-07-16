@@ -350,7 +350,7 @@ namespace larnest
     )
     {
         // Baller, 2013 JNIST 8 P08005
-        double csi = fBOXParameters.beta * (energy / dx) / (efield * density);
+        double csi = fBOXParameters.beta * (energy * 1e3 / dx) / (efield * density);
         double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + csi) / csi);
         
         LArYieldResult result;
@@ -359,8 +359,8 @@ namespace larnest
         result.LightYield = 0.0;
         result.Nex = 0.0;
         result.Nion = 0.0;
-        result.Ne = recombination_probability * energy / fWorkIonFunction;
-        result.Nph = (energy / fWorkQuantaFunction - result.Ne);
+        result.Ne = recombination_probability * energy / (fWorkIonFunction * 1e-3);
+        result.Nph = (energy / (fWorkQuantaFunction * 1e-3) - result.Ne);
         result.ElectricField = efield;
         return result;
     }
@@ -370,7 +370,7 @@ namespace larnest
     )
     {
         // Amoruso, et al NIM A 523 (2004) 275
-        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / dx) / (efield * density));
+        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy * 1e3 / dx) / (efield * density));
         
         LArYieldResult result;
         result.TotalYield = 0.0;
@@ -378,8 +378,8 @@ namespace larnest
         result.LightYield = 0.0;
         result.Nex = 0.0;
         result.Nion = 0.0;
-        result.Ne = recombination_probability * energy / fWorkIonFunction;
-        result.Nph = (energy / fWorkQuantaFunction - result.Ne);
+        result.Ne = recombination_probability * energy / (fWorkIonFunction * 1e-3);
+        result.Nph = (energy / (fWorkQuantaFunction * 1e-3) - result.Ne);
         result.ElectricField = efield;
         return result;
     }
