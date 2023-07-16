@@ -453,7 +453,7 @@ namespace larnest
         double LegacyGetLinearEnergyTransfer(double E);
 
     private:
-        bool fUseDokeBirks = {false};
+        bool fUseDokeBirks = {true};
 
         double fDensity = {1.393};
         double fRIdealGas = {8.31446261815324};
