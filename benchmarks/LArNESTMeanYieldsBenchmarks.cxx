@@ -42,9 +42,13 @@ int main(int argc, char* argv[])
 		energy_vals.emplace_back(start_val + step_size * i);
 	}
 	std::vector<LArInteraction> particle_types = {
-		LArInteraction::NR, LArInteraction::ER, LArInteraction::Alpha
+		LArInteraction::NR, LArInteraction::ER, LArInteraction::Alpha,
+		LArInteraction::dEdx, LArInteraction::LeptonLET, LArInteraction::LET,
+		LArInteraction::BOX, LArInteraction::BIRKS
 	};
-	std::vector<std::string> particle_type = {"NR", "ER", "Alpha"};
+	std::vector<std::string> particle_type = {
+		"NR", "ER", "Alpha", "dEdx", "LeptonLET", "LET", "BOX", "BIRKS"
+	};
 
 	// Construct NEST class using detector object
 	LArNEST nest;
@@ -85,7 +89,7 @@ int main(int argc, char* argv[])
 			for (size_t i = 0; i < num_energy_steps; i++) 
 			{
 				result = nest.FullCalculation(
-					particle_types[k], energy_vals[i], 0,
+					particle_types[k], energy_vals[i], 0.001,
 					electric_field[v], density, false
 				);
 				output_file << particle_type[k] << ",";

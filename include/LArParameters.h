@@ -26,7 +26,10 @@ namespace larnest
         Alpha = 2,
         dEdx = 3,
         LeptonLET = 4,
-        LET = 5
+        LET = 5,
+        BOX = 6,
+        BIRKS = 7,
+        Legacy = 8
     };
 
     enum class LArFluctuationModel 
@@ -139,14 +142,32 @@ namespace larnest
         double B = {-0.0932};
     };
 
+    struct BOXParameters
+    {
+        double alpha = {0.93};
+        double beta = {0.207};
+    };
+
+    struct BIRKSParameters
+    {
+        double Ab = {0.800};
+        double kb = {0.0486};
+    };
+
     struct DriftParameters 
     {
-        std::vector<double> A = {0.937729,   0.80302379,  0.7795972, 0.6911897,
-                                0.76551511, 0.502022794, 0.24207633};
-        std::vector<double> B = {-0.0734108, -0.06694564, -0.0990952, -0.092997,
-                                -0.0731659, -0.06644517, -0.03558428};
-        std::vector<double> C = {0.315338, 0.331798,  0.320876,  0.3295202,
-                                0.317972, 0.3290246, 0.33645519};
+        std::vector<double> A = {
+            0.937729, 0.80302379,  0.7795972, 0.6911897,
+            0.76551511, 0.502022794, 0.24207633
+        };
+        std::vector<double> B = {
+            -0.0734108, -0.06694564, -0.0990952, -0.092997,
+            -0.0731659, -0.06644517, -0.03558428
+        };
+        std::vector<double> C = {
+            0.315338, 0.331798,  0.320876,  0.3295202,
+            0.317972, 0.3290246, 0.33645519
+        };
 
         std::vector<double> TempLow = {84., 86., 88., 92., 96., 110., 125.};
         std::vector<double> TempHigh = {86., 88., 92., 96., 110., 125., 140.};

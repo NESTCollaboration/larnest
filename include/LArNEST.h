@@ -47,11 +47,16 @@ namespace larnest
         double NionFluctuation;
     };
 
+    struct LArPhotonStreamResult
+    {
+
+    };
+
     struct LArNESTResult 
     {
         LArYieldResult yields;
         LArYieldFluctuationResult fluctuations;
-        //photonstream photon_times;
+        LArPhotonStreamResult photon_times;
     };
 
     /**
@@ -120,6 +125,12 @@ namespace larnest
         void SetThomasImelParameters(ThomasImelParameters thomasImelParameters) {
             fThomasImelParameters = thomasImelParameters;
         }
+        void SetBOXParameters(BOXParameters boxParameters) {
+            fBOXParameters = boxParameters;
+        }
+        void SetBIRKSParameters(BIRKSParameters birksParameters) {
+            fBIRKSParameters = birksParameters;
+        }
         void SetDriftParameters(DriftParameters driftParameters) {
             fDriftParameters = driftParameters;
         }
@@ -154,7 +165,15 @@ namespace larnest
         ThomasImelParameters GetThomasImelParameters() {
             return fThomasImelParameters;
         }
-        DriftParameters GetDriftParameters() { return fDriftParameters; }
+        BOXParameters GetBOXParameters() {
+            return fBOXParameters;
+        }
+        BIRKSParameters GetBIRKSParameters() {
+            return fBIRKSParameters;
+        }
+        DriftParameters GetDriftParameters() { 
+            return fDriftParameters; 
+        }
 
         //-------------------------All Yields-------------------------//
         LArYieldResult GetRecombinationYields(double TotalYields,
@@ -352,7 +371,15 @@ namespace larnest
         double GetLETRecombinationProbability(double LET, double efield);
         LArYieldResult GetLETRecombinationYields(double ionization_yields, double exciton_yields,
                                                         double energy, double LET, double efield);
-        
+        //-----------------------------BOX Yields-----------------------------//
+        LArYieldResult GetBOXYields(
+            double energy, double dx, double efield, double density
+        );
+        //----------------------------BIRKS Yields----------------------------//
+        LArYieldResult GetBIRKSYields(
+            double energy, double dx, double efield, double density
+        );
+
         //----------------------------dE/dx Yields----------------------------//
         LArYieldResult GetdEdxRecombinationYields(double total_yields, double ionization_yields,
                                                         double energy, double dx, double efield);
@@ -446,6 +473,8 @@ namespace larnest
         LArAlphaYieldsParameters fAlpha;
 
         ThomasImelParameters fThomasImelParameters;
+        BOXParameters fBOXParameters;
+        BIRKSParameters fBIRKSParameters;
         DriftParameters fDriftParameters;
 
         enum LArFluctuationModel fLArFluctuationModel;

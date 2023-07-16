@@ -46,10 +46,16 @@ namespace larnest
             return GetERYields(energy, efield, density);
         } else if (species == LArInteraction::Alpha) {
             return GetAlphaYields(energy, efield, density);
+        } else if (species == LArInteraction::dEdx) {
+            return GetdEdxYields(energy, dx, efield, density);
         } else if (species == LArInteraction::LeptonLET) {
             return GetLeptonLETYields(energy, dx, efield, density);
         } else if (species == LArInteraction::LET) {
             return GetLETYields(energy, dx, efield, density);
+        } else if (species == LArInteraction::BOX) {
+            return GetBOXYields(energy, dx, efield, density);
+        } else if (species == LArInteraction::BIRKS) {
+            return GetBIRKSYields(energy, dx, efield, density);
         } else {
             return GetdEdxYields(energy, dx, efield, density);
         }
@@ -335,6 +341,45 @@ namespace larnest
         result.Nion = ionization_yields;
         result.Nph = exciton_yields + ionization_yields * recombination_probability;
         result.Ne = ionization_yields * (1.0 - recombination_probability);
+        result.ElectricField = efield;
+        return result;
+    }
+    //------------------------------BOX Yields-----------------------------//
+    LArYieldResult LArNEST::GetBOXYields(
+        double energy, double dx, double efield, double density
+    )
+    {
+        // Baller, 2013 JNIST 8 P08005
+        double csi = fBOXParameters.beta * (energy / dx) / (efield * density);
+        double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + csi) / csi);
+        
+        LArYieldResult result;
+        result.TotalYield = 0.0;
+        result.QuantaYield = 0.0;
+        result.LightYield = 0.0;
+        result.Nex = 0.0;
+        result.Nion = 0.0;
+        result.Ne = recombination_probability * energy / fWorkIonFunction;
+        result.Nph = (energy / fWorkQuantaFunction - result.Ne);
+        result.ElectricField = efield;
+        return result;
+    }
+    //------------------------------BIRKS Yields-----------------------------//
+    LArYieldResult LArNEST::GetBIRKSYields(
+        double energy, double dx, double efield, double density
+    )
+    {
+        // Amoruso, et al NIM A 523 (2004) 275
+        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / dx) / (efield * density));
+        
+        LArYieldResult result;
+        result.TotalYield = 0.0;
+        result.QuantaYield = 0.0;
+        result.LightYield = 0.0;
+        result.Nex = 0.0;
+        result.Nion = 0.0;
+        result.Ne = recombination_probability * energy / fWorkIonFunction;
+        result.Nph = (energy / fWorkQuantaFunction - result.Ne);
         result.ElectricField = efield;
         return result;
     }
@@ -651,6 +696,10 @@ namespace larnest
         return std::vector<double>();
     }
     //------------------------------------Legacy LArNEST------------------------------------//
+    /**
+     * The Legacy functions here are taken from Matthew Szydagis' original LBNE
+     * recombination code.  
+    */
     LArYieldResult LArNEST::LegacyGetYields(
         double energy, double efield, double yieldFactor,
         double excitationRatio, double epsilon, double recombProb
