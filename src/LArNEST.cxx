@@ -386,13 +386,13 @@ namespace larnest
     //-----------------------------dEdx Yields-----------------------------//
     double LArNEST::GetCanonicalTotalYields(double energy)
     {
-        double mean_quanta = energy / (fWorkQuantaFunction * 1e-6);
+        double mean_quanta = energy / (fWorkQuantaFunction * 1e-3);
         double Fano = sqrt(fFanoER * mean_quanta);
         return RandomGen::GetRandomGen()->rand_zero_trunc_gaussian(mean_quanta, Fano);
     }
     double LArNEST::GetCanonicalIonizationYields(double energy)
     {
-        double mean_quanta = energy / (GetEffectiveWorkIonFunction() * 1e-6);
+        double mean_quanta = energy / (GetEffectiveWorkIonFunction() * 1e-3);
         double Fano = sqrt(fFanoER * mean_quanta);
         return RandomGen::GetRandomGen()->rand_zero_trunc_gaussian(mean_quanta, Fano);
     }
