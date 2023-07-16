@@ -28,23 +28,24 @@ namespace larnest
 {
     struct LArYieldResult 
     {
-        double TotalYield;
-        double QuantaYield;
-        double LightYield;
-        double Nph;
-        double Ne;
-        double Nex;
-        double Nion;
-        double Lindhard;
-        double ElectricField;
+        double TotalYield = {0.0};
+        double QuantaYield = {0.0};
+        double LightYield = {0.0};
+        double Nph = {0.0};
+        double Ne = {0.0};
+        double Nex = {0.0};
+        double Nion = {0.0};
+        double Lindhard = {0.0};
+        double ElectricField = {0.0};
+        double RecombinationProbability = {0.0};
     };
 
     struct LArYieldFluctuationResult 
     {
-        double NphFluctuation;
-        double NeFluctuation;
-        double NexFluctuation;
-        double NionFluctuation;
+        double NphFluctuation = {0.0};
+        double NeFluctuation = {0.0};
+        double NexFluctuation = {0.0};
+        double NionFluctuation = {0.0};
     };
 
     struct LArPhotonStreamResult

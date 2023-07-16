@@ -94,8 +94,13 @@ namespace larnest
 
         double WQ_eV = fWorkQuantaFunction;
         double Lindhard = (TotalYields / energy) * WQ_eV * 1e-3;
-        LArYieldResult result{TotalYields, ElectronYields, PhotonYields, Nph,   Ne,
-                                Nex,         Nion,           Lindhard,     efield};
+        LArYieldResult result{
+            TotalYields, ElectronYields, PhotonYields, 
+            Nph, Ne,
+            Nex, Nion,           
+            Lindhard, efield,
+            (1.0 - Ne / Nion)
+        };
         return result;
     }
     //-------------------------NR Yields-------------------------//
@@ -342,6 +347,7 @@ namespace larnest
         result.Nph = exciton_yields + ionization_yields * recombination_probability;
         result.Ne = ionization_yields * (1.0 - recombination_probability);
         result.ElectricField = efield;
+        result.RecombinationProbability = recombination_probability;
         return result;
     }
     //------------------------------BOX Yields-----------------------------//
@@ -362,6 +368,7 @@ namespace larnest
         result.Ne = recombination_probability * energy / (fWorkIonFunction * 1e-3);
         result.Nph = (energy / (fWorkQuantaFunction * 1e-3) - result.Ne);
         result.ElectricField = efield;
+        result.RecombinationProbability = recombination_probability;
         return result;
     }
     //------------------------------BIRKS Yields-----------------------------//
@@ -381,6 +388,7 @@ namespace larnest
         result.Ne = recombination_probability * energy / (fWorkIonFunction * 1e-3);
         result.Nph = (energy / (fWorkQuantaFunction * 1e-3) - result.Ne);
         result.ElectricField = efield;
+        result.RecombinationProbability = recombination_probability;
         return result;
     }
     //-----------------------------dEdx Yields-----------------------------//
@@ -409,6 +417,7 @@ namespace larnest
         result.Nph = exciton_yields + ionization_yields * recombination_probability;
         result.Ne = ionization_yields * (1.0 - recombination_probability);
         result.ElectricField = efield;
+        result.RecombinationProbability = recombination_probability;
         return result;
     }
     double LArNEST::GetdEdxRecombinationProbability(double dEdx, double efield)
@@ -742,7 +751,8 @@ namespace larnest
         LArYieldResult result{
             (Ne + Nph) / energy, Ne / energy, Nph / energy, 
             Nph, Ne, Nex, Nion,
-            0.0, efield
+            0.0, efield,
+            recombProb
         };
         return result;
     }
