@@ -368,7 +368,7 @@ namespace larnest
         result.Ne = recombination_probability * energy / (fWorkIonFunction * 1e-3);
         result.Nph = (energy / (fWorkQuantaFunction * 1e-3) - result.Ne);
         result.ElectricField = efield;
-        result.RecombinationProbability = recombination_probability;
+        result.RecombinationProbability = 1.0 - recombination_probability;
         return result;
     }
     //------------------------------BIRKS Yields-----------------------------//
@@ -388,7 +388,7 @@ namespace larnest
         result.Ne = recombination_probability * energy / (fWorkIonFunction * 1e-3);
         result.Nph = (energy / (fWorkQuantaFunction * 1e-3) - result.Ne);
         result.ElectricField = efield;
-        result.RecombinationProbability = recombination_probability;
+        result.RecombinationProbability = 1.0 - recombination_probability;
         return result;
     }
     //-----------------------------dEdx Yields-----------------------------//
