@@ -356,7 +356,7 @@ namespace larnest
     )
     {
         // Baller, 2013 JNIST 8 P08005
-        double csi = fBOXParameters.beta * (energy * 1e3 / dx) / (efield * density);
+        double csi = fBOXParameters.beta * (energy / dx) / (efield * density);
         double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + csi) / csi);
         
         LArYieldResult result;
@@ -377,7 +377,7 @@ namespace larnest
     )
     {
         // Amoruso, et al NIM A 523 (2004) 275
-        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy * 1e3 / dx) / (efield * density));
+        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / dx) / (efield * density));
         
         LArYieldResult result;
         result.TotalYield = 0.0;
