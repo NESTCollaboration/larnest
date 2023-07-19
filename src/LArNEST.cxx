@@ -81,23 +81,6 @@ namespace larnest
     {
         double Ne = ElectronYields * energy;
         double Nph = PhotonYields * energy;
-
-        if (Ne < 1.0) {
-            if (Ne < 0.5) {
-                Ne = 0.0;
-            }
-            else {
-                Ne = 1.0;
-            }
-        }
-        if (Nph < 1.0) {
-            if (Nph < 0.5) {
-                Nph = 0.0;
-            }
-            else {
-                Nph = 1.0;
-            }
-        }
         double Nq = Ne + Nph;
 
         /// recombination
@@ -108,7 +91,7 @@ namespace larnest
         //      Nion = Nq/(1 + alpha) = (Ye + Yph)E/(1 + alpha)
         double Nion = Nq / (1 + fNexOverNion);
         double Nex = Nq - Nion;
-        double recombProb = 1.0 - (1.0 + fNexOverNion) * (Ne / Nq);
+        double recombProb = 1.0 - (Ne / Nion);
 
         double WQ_eV = fWorkQuantaFunction;
         double Lindhard = (TotalYields / energy) * WQ_eV * 1e-3;
