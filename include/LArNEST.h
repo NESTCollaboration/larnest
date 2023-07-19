@@ -123,6 +123,11 @@ namespace larnest
             LArERElectronYieldsDokeBirksParameters ERElectronYieldsDokeBirksParameters) {
             fER.doke_birks = ERElectronYieldsDokeBirksParameters;
         }
+        void SetdEdxParameters(
+            LArdEdxParameters dEdxParameters
+        ) {
+            fdEdxParameters = dEdxParameters;
+        }
         void SetThomasImelParameters(ThomasImelParameters thomasImelParameters) {
             fThomasImelParameters = thomasImelParameters;
         }
@@ -162,6 +167,9 @@ namespace larnest
         LArERElectronYieldsDokeBirksParameters
         GetERElectronYieldsDokeBirksParameters() {
             return fER.doke_birks;
+        }
+        LArdEdxParameters GetdEdxParameters() {
+            return fdEdxParameters;
         }
         ThomasImelParameters GetThomasImelParameters() {
             return fThomasImelParameters;
@@ -472,6 +480,7 @@ namespace larnest
         LArNRYieldsParameters fNR;
         LArERYieldsParameters fER;
         LArAlphaYieldsParameters fAlpha;
+        LArdEdxParameters fdEdxParameters;
 
         ThomasImelParameters fThomasImelParameters;
         BOXParameters fBOXParameters;

@@ -136,6 +136,13 @@ namespace larnest
         LArAlphaPhotonYieldsParameters Yph;
     };
 
+    struct LArdEdxParameters
+    {
+        double A = {0.87};
+        double kb = {0.045};
+        double c = {0.9};
+    };
+
     struct ThomasImelParameters 
     {
         double A = {0.1};

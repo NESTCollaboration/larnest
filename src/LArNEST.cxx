@@ -425,17 +425,19 @@ namespace larnest
     {
         if(fUseDokeBirks)
         {
-            // set up DokeBirks coefficients
-            double DokeBirksA = 0.07 * pow((efield), -0.85);
-            double DokeBirksC = 0.00;
-            if (efield == 0.0) 
-            {
-                DokeBirksA = 0.0003;
-                DokeBirksC = 0.75;
-            }
-            // B=A/(1-C) (see paper)
-            double DokeBirksB = DokeBirksA / (1 - DokeBirksC);
-            double recombProb = (DokeBirksA * dEdx) / (1 + DokeBirksB * dEdx) + DokeBirksC;
+            double field_factor = fdEdxParameters.kb * pow(efield, -fdEdxParameters.c);
+            double recombProb = fdEdxParameters.A / (1.0 + field_factor * dEdx);
+            // // set up DokeBirks coefficients
+            // double DokeBirksA = 0.07 * pow((efield), -0.85);
+            // double DokeBirksC = 0.00;
+            // if (efield == 0.0) 
+            // {
+            //     DokeBirksA = 0.0003;
+            //     DokeBirksC = 0.75;
+            // }
+            // // B=A/(1-C) (see paper)
+            // double DokeBirksB = DokeBirksA / (1 - DokeBirksC);
+            // double recombProb = (DokeBirksA * dEdx) / (1 + DokeBirksB * dEdx) + DokeBirksC;
 
             // check against unphysicality resulting from rounding errors
             if (recombProb < 0.0) {
