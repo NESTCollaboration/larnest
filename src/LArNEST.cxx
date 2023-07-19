@@ -411,7 +411,7 @@ namespace larnest
     )
     {
         LArYieldResult result;
-        double recombination_probability = GetdEdxRecombinationProbability(energy * 1e3 / dx, efield);
+        double recombination_probability = GetdEdxRecombinationProbability(energy / 1e3 / dx, efield);
         result.TotalYield = (ionization_yields + exciton_yields) / energy;
         result.Nex = exciton_yields;
         result.Nion = ionization_yields;
