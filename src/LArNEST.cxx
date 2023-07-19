@@ -411,7 +411,7 @@ namespace larnest
     )
     {
         LArYieldResult result;
-        double recombination_probability = GetdEdxRecombinationProbability(energy / 1e3 / dx, efield);
+        double recombination_probability = GetdEdxRecombinationProbability((energy * 1e-3) / dx, efield);
         result.TotalYield = (ionization_yields + exciton_yields) / energy;
         result.Nex = exciton_yields;
         result.Nion = ionization_yields;
@@ -423,7 +423,7 @@ namespace larnest
     }
     double LArNEST::GetdEdxRecombinationProbability(double dEdx, double efield)
     {
-        double field_factor = fdEdxParameters.kb * pow((efield / 1e3), -fdEdxParameters.c);
+        double field_factor = fdEdxParameters.kb * pow((efield * 1e-3), -fdEdxParameters.c);
         double recombProb = fdEdxParameters.A / (1.0 + field_factor * dEdx);
 
         // check against unphysicality resulting from rounding errors
