@@ -426,7 +426,7 @@ namespace larnest
         if(fUseDokeBirks)
         {
             // set up DokeBirks coefficients
-            double DokeBirksA = 0.07 * pow((efield), -0.85);
+            double DokeBirksA = 0.07 * pow((efield / 1e3), -0.85);
             double DokeBirksC = 0.00;
             if (efield == 0.0) 
             {
