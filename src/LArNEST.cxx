@@ -108,6 +108,7 @@ namespace larnest
         //      Nion = Nq/(1 + alpha) = (Ye + Yph)E/(1 + alpha)
         double Nion = Nq / (1 + fNexOverNion);
         double Nex = Nq - Nion;
+        double recombProb = 1.0 - (1.0 + fNexOverNion) * (Ne / Nq);
 
         double WQ_eV = fWorkQuantaFunction;
         double Lindhard = (TotalYields / energy) * WQ_eV * 1e-3;
@@ -116,7 +117,7 @@ namespace larnest
             Nph, Ne,
             Nex, Nion,           
             Lindhard, efield,
-            (1.0 - Ne / Nion)
+            recombProb
         };
         return result;
     }
@@ -373,7 +374,7 @@ namespace larnest
     )
     {
         // Baller, 2013 JNIST 8 P08005
-        double csi = fBOXParameters.beta * (energy / dx) / (efield * 1e3 * density);
+        double csi = fBOXParameters.beta * (energy / dx) / (efield * density / 1e3);
         double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + csi) / csi);
         
         LArYieldResult result;
@@ -394,7 +395,7 @@ namespace larnest
     )
     {
         // Amoruso, et al NIM A 523 (2004) 275
-        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / dx) / (efield * 1e3 * density));
+        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / dx) / (efield * density / 1e3));
         
         LArYieldResult result;
         result.TotalYield = 0.0;
