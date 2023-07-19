@@ -81,6 +81,23 @@ namespace larnest
     {
         double Ne = ElectronYields * energy;
         double Nph = PhotonYields * energy;
+
+        if (Ne < 1.0) {
+            if (Ne < 0.5) {
+                Ne = 0.0;
+            }
+            else {
+                Ne = 1.0;
+            }
+        }
+        if (Nph < 1.0) {
+            if (Nph < 0.5) {
+                Nph = 0.0;
+            }
+            else {
+                Nph = 1.0;
+            }
+        }
         double Nq = Ne + Nph;
 
         /// recombination
