@@ -411,7 +411,7 @@ namespace larnest
     )
     {
         LArYieldResult result;
-        double recombination_probability = GetdEdxRecombinationProbability(energy / dx, efield);
+        double recombination_probability = GetdEdxRecombinationProbability(energy * 1e3 / dx, efield);
         result.TotalYield = (ionization_yields + exciton_yields) / energy;
         result.Nex = exciton_yields;
         result.Nion = ionization_yields;
@@ -423,35 +423,17 @@ namespace larnest
     }
     double LArNEST::GetdEdxRecombinationProbability(double dEdx, double efield)
     {
-        if(fUseDokeBirks)
-        {
-            double field_factor = fdEdxParameters.kb * pow(efield, -fdEdxParameters.c);
-            double recombProb = fdEdxParameters.A / (1.0 + field_factor * dEdx);
-            // // set up DokeBirks coefficients
-            // double DokeBirksA = 0.07 * pow((efield), -0.85);
-            // double DokeBirksC = 0.00;
-            // if (efield == 0.0) 
-            // {
-            //     DokeBirksA = 0.0003;
-            //     DokeBirksC = 0.75;
-            // }
-            // // B=A/(1-C) (see paper)
-            // double DokeBirksB = DokeBirksA / (1 - DokeBirksC);
-            // double recombProb = (DokeBirksA * dEdx) / (1 + DokeBirksB * dEdx) + DokeBirksC;
+        double field_factor = fdEdxParameters.kb * pow((efield / 1e3), -fdEdxParameters.c);
+        double recombProb = fdEdxParameters.A / (1.0 + field_factor * dEdx);
 
-            // check against unphysicality resulting from rounding errors
-            if (recombProb < 0.0) {
-                recombProb = 0.0;
-            }
-            if (recombProb > 1.0) {
-                recombProb = 1.0;
-            }
-            return recombProb;
+        // check against unphysicality resulting from rounding errors
+        if (recombProb < 0.0) {
+            recombProb = 0.0;
         }
-        else
-        {
-            return 0;
+        if (recombProb > 1.0) {
+            recombProb = 1.0;
         }
+        return recombProb;
     }
     LArYieldResult LArNEST::GetdEdxYields(
         double energy, double dx, double efield, double density
