@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 	}
 
 	// set up energy steps
-	int num_energy_steps = 50000;
+	size_t num_energy_steps = 50000;
 	std::vector<double> energy_vals;
 	double start_val = .1;
 	double end_val = 1000;
