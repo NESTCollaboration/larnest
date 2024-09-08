@@ -11,8 +11,8 @@
 #define LARG4_ISCALCNESTLAr_H
 
 #include "larsim/IonizationScintillation/ISCalc.h"
-#include "LArDetector.hh"
-#include "LArNEST.hh"
+#include "larsim/larnest/LArDetector.hh"
+#include "larsim/larnest/LArNEST.hh"
 
 namespace spacecharge {
   class SpaceCharge;
