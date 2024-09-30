@@ -36,7 +36,7 @@ namespace larg4 {
     CLHEP::HepRandomEngine& fEngine; // random engine
     const spacecharge::SpaceCharge* fSCE;
     
-    larnest::LArNEST* mLArNEST;
+    larnest::LArNEST mLArNEST;
   };
 }
 #endif // LARG4_ISCALCNESTLAr_H

@@ -34,8 +34,6 @@ namespace larg4 {
   ISCalcNESTLAr::ISCalcNESTLAr(CLHEP::HepRandomEngine& Engine)
     : fEngine(Engine), fSCE{lar::providerFrom<spacecharge::SpaceChargeService>()}
   {
-    mLArNEST = new larnest::LArNEST();
-
     std::cout << "ISCalcNESTLAr Initialize." << std::endl;
   }
 
