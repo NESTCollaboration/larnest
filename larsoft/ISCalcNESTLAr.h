@@ -34,8 +34,8 @@ namespace larg4 {
                                sim::SimEnergyDeposit const& edep) override;
 
   private:
-    ISTPC fISTPC;
     CLHEP::HepRandomEngine& fEngine; // random engine
+    ISTPC fISTPC;
     const spacecharge::SpaceCharge* fSCE;
     
     larnest::LArNEST mLArNEST;

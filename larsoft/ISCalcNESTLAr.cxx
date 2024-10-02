@@ -38,8 +38,8 @@ namespace larg4 {
   //----------------------------------------------------------------------------
   ISCalcNESTLAr::ISCalcNESTLAr(CLHEP::HepRandomEngine& Engine)
     : fEngine(Engine)
-    , fSCE{lar::providerFrom<spacecharge::SpaceChargeService>()}
     , fISTPC{*(lar::providerFrom<geo::Geometry>())}
+    , fSCE{lar::providerFrom<spacecharge::SpaceChargeService>()}
   {
     std::cout << "ISCalcNESTLAr Initialize." << std::endl;
   }
@@ -57,7 +57,7 @@ namespace larg4 {
 
     larnest::LArYieldResult yields = mLArNEST.GetYields(
       species, energy_deposit, ds, EFieldStep, 1.39
-    )
+    );
     double NumElectrons = yields.Ne;
     double NumPhotons = yields.Nph;
 
@@ -122,5 +122,5 @@ namespace larg4 {
     }
 
     return elecvec.Mag();
-
+  }
 }
