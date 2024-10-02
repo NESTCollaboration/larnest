@@ -11,6 +11,7 @@
 #define LARG4_ISCALCNESTLAr_H
 
 #include "larsim/IonizationScintillation/ISCalc.h"
+#include "larsim/IonizationScintillation/ISTPC.h"
 #include "larsim/IonizationScintillation/LArNEST.h"
 
 namespace spacecharge {
@@ -33,6 +34,7 @@ namespace larg4 {
                                sim::SimEnergyDeposit const& edep) override;
 
   private:
+    ISTPC fISTPC;
     CLHEP::HepRandomEngine& fEngine; // random engine
     const spacecharge::SpaceCharge* fSCE;
     
