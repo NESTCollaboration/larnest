@@ -41,14 +41,27 @@ namespace larg4 {
   ISCalcData ISCalcNESTLAr::CalcIonAndScint(detinfo::DetectorPropertiesData const& detProp,
                                             sim::SimEnergyDeposit const& edep)
   {
-    
-    std::cout << "HERE IN NEST!" << std::endl;
-    return {0.0, 0.0, 0.0, 0.0};
+    // Get energy deposit
+    double const energy_deposit = edep.Energy();
+    double EFieldStep = EFieldAtStep(detProp.Efield(), edep);
+    double ds = edep.StepLength();
 
-    // return {energyDeposit,
-    //         static_cast<double>(NumElectrons),
-    //         static_cast<double>(NumPhotons),
-    //         GetScintYieldRatio(edep)};
+    larnest::LArInteraction species = larnest::LArInteraction::dEdx;
+
+    larnest::LArYieldResult yields = mLArNEST->GetYields(
+      species, energy_deposit, ds, EFieldStep, 1.39
+    )
+    double NumElectrons = yields.Ne;
+    double NumPhotons = yields.Nph;
+
+    std::cout << "HERE IN NEST!" << std::endl;
+    std::cout << "num_e: " << NumElectrons << std::endl;
+    std::cout << "num_ph: " << NumPhotons << std::endl;
+
+    return {energy_deposit,
+            static_cast<double>(NumElectrons),
+            static_cast<double>(NumPhotons),
+            0};
   }
 
   
@@ -56,17 +69,51 @@ namespace larg4 {
   //----------------------------------------------------------------------------
   double ISCalcNESTLAr::EFieldAtStep(double efield, sim::SimEnergyDeposit const& edep)
   {
-    geo::Point_t pos = edep.MidPoint();
-    double EField = efield;
-    geo::Vector_t eFieldOffsets;
+    // electric field outside active volume set to zero
+    if (!fISTPC.isScintInActiveVolume(edep.MidPoint())) return 0.;
+
+    TVector3 elecvec;
+
+    art::ServiceHandle<geo::Geometry const> fGeometry;
+    geo::TPCID tpcid = fGeometry->PositionToTPCID(edep.MidPoint());
+    if (!bool(tpcid)) return 0.;
+    const geo::TPCGeo& tpcGeo = fGeometry->TPC(tpcid);
+
+    if (tpcGeo.DetectDriftDirection() == 1) elecvec.SetXYZ(1, 0, 0);
+    if (tpcGeo.DetectDriftDirection() == -1) elecvec.SetXYZ(-1, 0, 0);
+    if (tpcGeo.DetectDriftDirection() == 2) elecvec.SetXYZ(0, 1, 0);
+    if (tpcGeo.DetectDriftDirection() == -2) elecvec.SetXYZ(0, -1, 0);
+    if (tpcGeo.DetectDriftDirection() == 3) elecvec.SetXYZ(0, 0, 1);
+    if (tpcGeo.DetectDriftDirection() == -3) elecvec.SetXYZ(0, 0, -1);
+
+    elecvec *= efield;
+
     if (fSCE->EnableSimEfieldSCE()) {
-      eFieldOffsets = fSCE->GetEfieldOffsets(pos);
-      EField =
-        std::sqrt((efield + efield * eFieldOffsets.X()) * (efield + efield * eFieldOffsets.X()) +
-                  (efield * eFieldOffsets.Y() * efield * eFieldOffsets.Y()) +
-                  (efield * eFieldOffsets.Z() * efield * eFieldOffsets.Z()));
+      auto const eFieldOffsets = fSCE->GetEfieldOffsets(edep.MidPoint());
+      TVector3 scevec;
+
+      if (tpcGeo.DetectDriftDirection() == 1)
+        scevec.SetXYZ(
+          efield * eFieldOffsets.X(), efield * eFieldOffsets.Y(), efield * eFieldOffsets.Z());
+      if (tpcGeo.DetectDriftDirection() == -1)
+        scevec.SetXYZ(
+          -1 * efield * eFieldOffsets.X(), efield * eFieldOffsets.Y(), efield * eFieldOffsets.Z());
+      if (tpcGeo.DetectDriftDirection() == 2)
+        scevec.SetXYZ(
+          efield * eFieldOffsets.X(), efield * eFieldOffsets.Y(), efield * eFieldOffsets.Z());
+      if (tpcGeo.DetectDriftDirection() == -2)
+        scevec.SetXYZ(
+          efield * eFieldOffsets.X(), -1 * efield * eFieldOffsets.Y(), efield * eFieldOffsets.Z());
+      if (tpcGeo.DetectDriftDirection() == 3)
+        scevec.SetXYZ(
+          efield * eFieldOffsets.X(), efield * eFieldOffsets.Y(), efield * eFieldOffsets.Z());
+      if (tpcGeo.DetectDriftDirection() == -3)
+        scevec.SetXYZ(
+          efield * eFieldOffsets.X(), efield * eFieldOffsets.Y(), -1 * efield * eFieldOffsets.Z());
+
+      elecvec += scevec;
     }
-    return EField;
-  }
+
+    return elecvec.Mag();
 
 }
