@@ -152,11 +152,14 @@ namespace larnest
     struct BOXParameters
     {
         double alpha = {0.93};
-        double beta = {0.207};
+        double beta = {0.152653};
     };
 
     struct BIRKSParameters
     {
+        // Birks parameters are from ICARUS measurements:
+        // S. Amoruso et al., "Study of electron recombination 
+        // in liquid argon with the ICARUS TPC", NIM A 523 (2004) 275.
         double Ab = {0.800};
         double kb = {0.0486};
     };
