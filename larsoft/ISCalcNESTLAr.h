@@ -10,6 +10,8 @@
 #ifndef LARG4_ISCALCNESTLAr_H
 #define LARG4_ISCALCNESTLAr_H
 
+#include "fhiclcpp/ParameterSet.h"
+
 #include "larsim/IonizationScintillation/ISCalc.h"
 #include "larsim/IonizationScintillation/ISTPC.h"
 #include "larsim/IonizationScintillation/LArNEST.h"
