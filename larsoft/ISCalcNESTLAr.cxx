@@ -50,8 +50,6 @@ namespace larg4
     {
         std::cout << "ISCalcNESTLAr Initialize." << std::endl;
 
-        fScintPreScale = lar::providerFrom<detinfo::LArPropertiesService>()->ScintPreScale();
-
         art::ServiceHandle<sim::LArG4Parameters const> LArG4PropHandle;
 
         // Adjust NEST parameters

@@ -49,8 +49,8 @@ namespace larg4
         void endJob() override;
 
     private:
-        fhicl::ParameterSet const& fParameterSet;
         std::unique_ptr<ISCalc> fISAlg;
+        fhicl::ParameterSet const& fParameterSet;
         art::InputTag fEDepTag;
         art::InputTag calcTag; // name of calculator to use, NEST or Separate
         CLHEP::HepRandomEngine& fEngine;
@@ -59,8 +59,8 @@ namespace larg4
 
     ISCalcAna::ISCalcAna(fhicl::ParameterSet const& pset)
     : EDAnalyzer(pset)
-    , fEDepTag{pset.get<art::InputTag>("SimulationLabel")}
     , fParameterSet(pset)
+    , fEDepTag{pset.get<art::InputTag>("SimulationLabel")}
     , calcTag{pset.get<art::InputTag>("ISCalcAlg")}
     , fEngine(art::ServiceHandle<rndm::NuRandomService>()->registerAndSeedEngine(
         createEngine(0, "HepJamesRandom", "NEST"),
