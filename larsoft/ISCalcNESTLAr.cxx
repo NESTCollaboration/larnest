@@ -53,7 +53,7 @@ namespace larg4
         art::ServiceHandle<sim::LArG4Parameters const> LArG4PropHandle;
 
         // Adjust NEST parameters
-        fNESTMode = pset.get<art::InputTag>("NESTMode")
+        fNESTMode = pset.get<art::InputTag>("NESTMode");
         std::cout << "NEST Mode: " << fNESTMode << std::endl;
     }
 
