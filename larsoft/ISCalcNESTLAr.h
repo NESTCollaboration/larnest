@@ -10,6 +10,7 @@
 #ifndef LARG4_ISCALCNESTLAr_H
 #define LARG4_ISCALCNESTLAr_H
 
+#include "canvas/Utilities/InputTag.h"
 #include "fhiclcpp/ParameterSet.h"
 
 #include "larsim/IonizationScintillation/ISCalc.h"
@@ -57,6 +58,8 @@ namespace larg4
         const spacecharge::SpaceCharge* fSCE;
         
         larnest::LArNEST mLArNEST;
+
+        art::InputTag fNESTMode;
     };
 }
 #endif // LARG4_ISCALCNESTLAr_H
