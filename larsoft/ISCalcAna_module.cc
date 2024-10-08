@@ -59,7 +59,7 @@ namespace larg4
 
     ISCalcAna::ISCalcAna(fhicl::ParameterSet const& pset)
     : EDAnalyzer(pset)
-    , fParameterSet(pset)
+    , fParameterSet{pset}
     , fEDepTag{pset.get<art::InputTag>("SimulationLabel")}
     , calcTag{pset.get<art::InputTag>("ISCalcAlg")}
     , fEngine(art::ServiceHandle<rndm::NuRandomService>()->registerAndSeedEngine(

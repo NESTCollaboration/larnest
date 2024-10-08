@@ -42,7 +42,7 @@ namespace larg4
         detinfo::DetectorPropertiesData const& detProp, 
         CLHEP::HepRandomEngine& Engine
     )
-    : fParameterSet(pset)
+    : fParameterSet{pset}
     , fEngine(Engine)
     , fISTPC{*(lar::providerFrom<geo::Geometry>())}
     , fBinomialGen{CLHEP::RandBinomial(Engine)}

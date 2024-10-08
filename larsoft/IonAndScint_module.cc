@@ -90,7 +90,7 @@ namespace larg4
     //......................................................................
     IonAndScint::IonAndScint(fhicl::ParameterSet const& pset)
     : art::EDProducer{pset}
-    , fParameterSet(pset)
+    , fParameterSet{pset}
     , calcTag{pset.get<art::InputTag>("ISCalcAlg")}
     , fInputModuleLabels{pset.get<std::vector<std::string>>("InputModuleLabels", {})}
     , fEngine(art::ServiceHandle<rndm::NuRandomService> {}
@@ -104,7 +104,6 @@ namespace larg4
     , fSavePriorSCE{pset.get<bool>("SavePriorSCE", false)}
     {
         std::cout << "IonAndScint Module Construct" << std::endl;
-        std::cout << pset.get<art::InputTag>("NESTMode") << std::endl;
 
         if (Instances.empty()) 
         {
