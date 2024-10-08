@@ -104,6 +104,7 @@ namespace larg4
     , fSavePriorSCE{pset.get<bool>("SavePriorSCE", false)}
     {
         std::cout << "IonAndScint Module Construct" << std::endl;
+        std::cout << pset.get<art::InputTag>("NESTMode") << std::endl;
 
         if (Instances.empty()) 
         {
