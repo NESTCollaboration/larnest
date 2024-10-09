@@ -39,7 +39,11 @@ protodune_ionandscint_correlated:
   Instances:    "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter"
   ISCalcAlg:    "Correlated"
   SavePriorSCE: true
-  NESTMode:     "Box"
+  nest_mode:    "Box"
+  nest_box_parameters_alpha:  0.93
+  nest_box_parameters_beta:   0.152653
+  nest_birks_parameters_Ab:   0.800
+  nest_birks_parameters_kb:   0.0486
 }   
 protodune_ionandscint_nest: @local::protodune_ionandscint_correlated
 protodune_ionandscint_nest.ISCalcAlg: "NEST"

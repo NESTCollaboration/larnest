@@ -51,7 +51,7 @@ namespace larg4
         ) override;
 
     private:
-        fhicl::ParameterSet const& fParameterSet;
+        fhicl::ParameterSet fParameterSet;
         CLHEP::HepRandomEngine& fEngine; // random engine
         ISTPC fISTPC;
         CLHEP::RandBinomial fBinomialGen;

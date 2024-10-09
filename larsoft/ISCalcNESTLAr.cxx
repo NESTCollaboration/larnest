@@ -53,7 +53,7 @@ namespace larg4
         art::ServiceHandle<sim::LArG4Parameters const> LArG4PropHandle;
 
         // Adjust NEST parameters
-        fNESTMode = pset.get<art::InputTag>("NESTMode");
+        fNESTMode = pset.get<art::InputTag>("nest_mode");
         std::cout << "NEST Mode: " << fNESTMode << std::endl;
     }
 
@@ -81,7 +81,7 @@ namespace larg4
         double NumElectrons = yields.Ne;
         double NumPhotons = yields.Nph;
 
-        // std::cout << "HERE IN NEST! num_e: " << NumElectrons << ", num_ph: " << NumPhotons << std::endl;
+        std::cout << "HERE IN NEST! num_e: " << NumElectrons << ", num_ph: " << NumPhotons << std::endl;
 
         return {
             energy_deposit,

@@ -357,8 +357,8 @@ namespace larnest
     )
     {
         // Baller, 2013 JNIST 8 P08005
-        double csi = fBOXParameters.beta * (energy / dx) / efield;
-        double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + csi) / csi);
+        double xi = fBOXParameters.beta * (energy / dx) / efield;
+        double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + xi) / xi);
         
         LArYieldResult result;
         result.TotalYield = 0.0;

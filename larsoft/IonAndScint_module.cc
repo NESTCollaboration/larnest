@@ -68,7 +68,7 @@ namespace larg4
         std::vector<art::Handle<SimEnergyDepositCollection>> inputCollections(art::Event const&) const;
 
         // Parameter set to pass to NEST
-        fhicl::ParameterSet const& fParameterSet;
+        fhicl::ParameterSet fParameterSet;
 
         // name of calculator: Separate, Correlated, or NEST
         art::InputTag calcTag;
