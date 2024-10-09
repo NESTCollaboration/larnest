@@ -55,18 +55,102 @@ namespace larg4
         // Adjust NEST parameters
         fNESTMode = pset.get<art::InputTag>("nest_mode");
         larnest::LArNRYieldsParameters NRYieldsParameters;
+        larnest::LArERElectronYieldsAlphaParameters ERElectronYieldsAlphaParameters;
+        larnest::LArERElectronYieldsBetaParameters ERElectronYieldsBetaParameters;
+        larnest::LArERElectronYieldsGammaParameters ERElectronYieldsGammaParameters;
+        larnest::LArERElectronYieldsDokeBirksParameters ERElectronYieldsDokeBirksParameters;
         larnest::LArERYieldsParameters ERYieldsParameters;
         larnest::LArAlphaElectronYieldsParameters AlphaElectronYieldsParameters;
         larnest::LArAlphaPhotonYieldsParameters AlphaPhotonYieldsParameters;
+        larnest::LArAlphaYieldsParameters AlphaYieldsParameters;
         larnest::LArdEdxParameters dEdxParameters;
         larnest::BOXParameters BOXParameters;
         larnest::BIRKSParameters BIRKSParameters;
+
+        NRYieldsParameters.alpha = pset.get<Double_t>("nest_nr_yields_parameters_alpha");
+        NRYieldsParameters.beta = pset.get<Double_t>("nest_nr_yields_parameters_beta");
+        NRYieldsParameters.gamma = pset.get<Double_t>("nest_nr_yields_parameters_gamma");
+        NRYieldsParameters.delta = pset.get<Double_t>("nest_nr_yields_parameters_delta");
+        NRYieldsParameters.epsilon = pset.get<Double_t>("nest_nr_yields_parameters_epsilon");
+        NRYieldsParameters.zeta = pset.get<Double_t>("nest_nr_yields_parameters_zeta");
+        NRYieldsParameters.eta = pset.get<Double_t>("nest_nr_yields_parameters_eta");
+
+        ERElectronYieldsAlphaParameters.A = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_A");
+        ERElectronYieldsAlphaParameters.B = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_B");
+        ERElectronYieldsAlphaParameters.C = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_C");
+        ERElectronYieldsAlphaParameters.D = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_D");
+        ERElectronYieldsAlphaParameters.E = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_E");
+        ERElectronYieldsAlphaParameters.F = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_F");
+        ERElectronYieldsAlphaParameters.G = pset.get<Double_t>("nest_er_electron_yields_alpha_parameters_G");
+
+        ERElectronYieldsBetaParameters.A = pset.get<Double_t>("nest_er_electron_yields_beta_parameters_A");
+        ERElectronYieldsBetaParameters.B = pset.get<Double_t>("nest_er_electron_yields_beta_parameters_B");
+        ERElectronYieldsBetaParameters.C = pset.get<Double_t>("nest_er_electron_yields_beta_parameters_C");
+        ERElectronYieldsBetaParameters.D = pset.get<Double_t>("nest_er_electron_yields_beta_parameters_D");
+        ERElectronYieldsBetaParameters.E = pset.get<Double_t>("nest_er_electron_yields_beta_parameters_E");
+        ERElectronYieldsBetaParameters.F = pset.get<Double_t>("nest_er_electron_yields_beta_parameters_F");
+
+        ERElectronYieldsGammaParameters.A = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_A");
+        ERElectronYieldsGammaParameters.B = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_B");
+        ERElectronYieldsGammaParameters.C = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_C");
+        ERElectronYieldsGammaParameters.D = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_D");
+        ERElectronYieldsGammaParameters.E = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_E");
+        ERElectronYieldsGammaParameters.F = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_F");
+        ERElectronYieldsGammaParameters.G = pset.get<Double_t>("nest_er_electron_yields_gamma_parameters_G");
+
+        ERElectronYieldsDokeBirksParameters.A = pset.get<Double_t>("nest_er_electron_yields_doke_birks_parameters_A");
+        ERElectronYieldsDokeBirksParameters.B = pset.get<Double_t>("nest_er_electron_yields_doke_birks_parameters_B");
+        ERElectronYieldsDokeBirksParameters.C = pset.get<Double_t>("nest_er_electron_yields_doke_birks_parameters_C");
+        ERElectronYieldsDokeBirksParameters.D = pset.get<Double_t>("nest_er_electron_yields_doke_birks_parameters_D");
+        ERElectronYieldsDokeBirksParameters.E = pset.get<Double_t>("nest_er_electron_yields_doke_birks_parameters_E");
+
+        ERYieldsParameters.alpha = ERElectronYieldsAlphaParameters;
+        ERYieldsParameters.beta = ERElectronYieldsBetaParameters;
+        ERYieldsParameters.gamma = ERElectronYieldsGammaParameters;
+        ERYieldsParameters.doke_birks = ERElectronYieldsDokeBirksParameters;
+        ERYieldsParameters.p1 = pset.get<Double_t>("nest_er_yields_parameters_p1");
+        ERYieldsParameters.p2 = pset.get<Double_t>("nest_er_yields_parameters_p2");
+        ERYieldsParameters.p3 = pset.get<Double_t>("nest_er_yields_parameters_p3");
+        ERYieldsParameters.p4 = pset.get<Double_t>("nest_er_yields_parameters_p4");
+        ERYieldsParameters.p5 = pset.get<Double_t>("nest_er_yields_parameters_p5");
+        ERYieldsParameters.delta = pset.get<Double_t>("nest_er_yields_parameters_delta");
+        ERYieldsParameters.let = pset.get<Double_t>("nest_er_yields_parameters_let");
+
+        AlphaElectronYieldsParameters.A = pset.get<Double_t>("nest_alpha_electron_yields_parameters_A");
+        AlphaElectronYieldsParameters.B = pset.get<Double_t>("nest_alpha_electron_yields_parameters_B");
+        AlphaElectronYieldsParameters.C = pset.get<Double_t>("nest_alpha_electron_yields_parameters_C");
+        AlphaElectronYieldsParameters.D = pset.get<Double_t>("nest_alpha_electron_yields_parameters_D");
+        AlphaElectronYieldsParameters.E = pset.get<Double_t>("nest_alpha_electron_yields_parameters_E");
+        AlphaElectronYieldsParameters.F = pset.get<Double_t>("nest_alpha_electron_yields_parameters_F");
+        AlphaElectronYieldsParameters.G = pset.get<Double_t>("nest_alpha_electron_yields_parameters_G");
+        AlphaElectronYieldsParameters.H = pset.get<Double_t>("nest_alpha_electron_yields_parameters_H");
+        AlphaElectronYieldsParameters.I = pset.get<Double_t>("nest_alpha_electron_yields_parameters_I");
+        AlphaElectronYieldsParameters.J = pset.get<Double_t>("nest_alpha_electron_yields_parameters_J");
+
+        AlphaPhotonYieldsParameters.A = pset.get<Double_t>("nest_alpha_photon_yields_parameters_A");
+        AlphaPhotonYieldsParameters.B = pset.get<Double_t>("nest_alpha_photon_yields_parameters_B");
+        AlphaPhotonYieldsParameters.C = pset.get<Double_t>("nest_alpha_photon_yields_parameters_C");
+        AlphaPhotonYieldsParameters.D = pset.get<Double_t>("nest_alpha_photon_yields_parameters_D");
+        AlphaPhotonYieldsParameters.E = pset.get<Double_t>("nest_alpha_photon_yields_parameters_E");
+        AlphaPhotonYieldsParameters.F = pset.get<Double_t>("nest_alpha_photon_yields_parameters_F");
+        AlphaPhotonYieldsParameters.G = pset.get<Double_t>("nest_alpha_photon_yields_parameters_G");
+        AlphaPhotonYieldsParameters.H = pset.get<Double_t>("nest_alpha_photon_yields_parameters_H");
+        AlphaPhotonYieldsParameters.I = pset.get<Double_t>("nest_alpha_photon_yields_parameters_I");
+        AlphaPhotonYieldsParameters.J = pset.get<Double_t>("nest_alpha_photon_yields_parameters_J");
+        AlphaPhotonYieldsParameters.K = pset.get<Double_t>("nest_alpha_photon_yields_parameters_K");
+        AlphaPhotonYieldsParameters.L = pset.get<Double_t>("nest_alpha_photon_yields_parameters_L");
+        AlphaPhotonYieldsParameters.M = pset.get<Double_t>("nest_alpha_photon_yields_parameters_M");
+        AlphaYieldsParameters.Ye = AlphaElectronYieldsParameters;
+        AlphaYieldsParameters.Yph = AlphaPhotonYieldsParameters;
 
         BOXParameters.alpha = pset.get<Double_t>("nest_box_parameters_alpha");
         BOXParameters.beta = pset.get<Double_t>("nest_box_parameters_beta");
         BIRKSParameters.Ab = pset.get<Double_t>("nest_birks_parameters_Ab");
         BIRKSParameters.kb = pset.get<Double_t>("nest_birks_parameters_kb");
 
+        mLArNEST.SetNRYieldsParameters(NRYieldsParameters);
+        mLArNEST.SetERYieldsParameters(ERYieldsParameters);
+        mLArNEST.SetAlphaYieldsParameters(AlphaYieldsParameters);
         mLArNEST.SetBOXParameters(BOXParameters);
         mLArNEST.SetBIRKSParameters(BIRKSParameters);
     }

@@ -40,6 +40,68 @@ protodune_ionandscint_correlated:
   ISCalcAlg:    "Correlated"
   SavePriorSCE: true
   nest_mode:    "Box"
+  nest_nr_yields_parameters_alpha:  11.10
+  nest_nr_yields_parameters_beta:   0.087
+  nest_nr_yields_parameters_gamma:  0.1
+  nest_nr_yields_parameters_delta:  -0.0932
+  nest_nr_yields_parameters_epsilon:  2.998
+  nest_nr_yields_parameters_zeta:  0.3
+  nest_nr_yields_parameters_eta:  2.94
+  nest_er_electron_yields_alpha_parameters_A:  32.988
+  nest_er_electron_yields_alpha_parameters_B:  -552.988
+  nest_er_electron_yields_alpha_parameters_C:  17.2346
+  nest_er_electron_yields_alpha_parameters_D:  -4.7
+  nest_er_electron_yields_alpha_parameters_E:  0.025115
+  nest_er_electron_yields_alpha_parameters_F:  0.265360653
+  nest_er_electron_yields_alpha_parameters_G:  0.242671
+  nest_er_electron_yields_beta_parameters_A:  0.778482
+  nest_er_electron_yields_beta_parameters_B:  25.9
+  nest_er_electron_yields_beta_parameters_C:  1.105
+  nest_er_electron_yields_beta_parameters_D:  0.4
+  nest_er_electron_yields_beta_parameters_E:  4.55
+  nest_er_electron_yields_beta_parameters_F:  -7.502
+  nest_er_electron_yields_gamma_parameters_A:  0.659509
+  nest_er_electron_yields_gamma_parameters_B:  1000
+  nest_er_electron_yields_gamma_parameters_C:  6.5
+  nest_er_electron_yields_gamma_parameters_D:  5.0
+  nest_er_electron_yields_gamma_parameters_E:  -0.5
+  nest_er_electron_yields_gamma_parameters_F:  1047.408
+  nest_er_electron_yields_gamma_parameters_G:  0.01851
+  nest_er_electron_yields_doke_birks_parameters_A:  1052.264
+  nest_er_electron_yields_doke_birks_parameters_B:  14159348347.7
+  nest_er_electron_yields_doke_birks_parameters_C:  -5.0
+  nest_er_electron_yields_doke_birks_parameters_D:  0.157933
+  nest_er_electron_yields_doke_birks_parameters_E:  1.83894
+  nest_er_yields_parameters_p1:  1.0
+  nest_er_yields_parameters_p2:  10.304
+  nest_er_yields_parameters_p3:  13.0654
+  nest_er_yields_parameters_p4:  0.10535
+  nest_er_yields_parameters_p5:  0.7
+  nest_er_yields_parameters_delta:  15.7489
+  nest_er_yields_parameters_let:  -2.07763
+  nest_alpha_electron_yields_parameters_A:  0.00016129032
+  nest_alpha_electron_yields_parameters_B:  64478398.7663
+  nest_alpha_electron_yields_parameters_C:  0.173553719
+  nest_alpha_electron_yields_parameters_D:  1.21
+  nest_alpha_electron_yields_parameters_E:  0.02852
+  nest_alpha_electron_yields_parameters_F:  0.01
+  nest_alpha_electron_yields_parameters_G:  4.71598
+  nest_alpha_electron_yields_parameters_H:  7.72848
+  nest_alpha_electron_yields_parameters_I:  -0.109802
+  nest_alpha_electron_yields_parameters_J:  3.0
+  nest_alpha_photon_yields_parameters_A:  1.16
+  nest_alpha_photon_yields_parameters_B:  -0.012
+  nest_alpha_photon_yields_parameters_C:  0.00015384615
+  nest_alpha_photon_yields_parameters_D:  278037.250283
+  nest_alpha_photon_yields_parameters_E:  0.173553719
+  nest_alpha_photon_yields_parameters_F:  1.21
+  nest_alpha_photon_yields_parameters_G:  2
+  nest_alpha_photon_yields_parameters_H:  0.653503
+  nest_alpha_photon_yields_parameters_I:  4.98483
+  nest_alpha_photon_yields_parameters_J:  10.0822
+  nest_alpha_photon_yields_parameters_K:  1.2076
+  nest_alpha_photon_yields_parameters_L:  -0.97977
+  nest_alpha_photon_yields_parameters_M:  3.0
   nest_box_parameters_alpha:  0.93
   nest_box_parameters_beta:   0.152653
   nest_birks_parameters_Ab:   0.800

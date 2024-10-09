@@ -123,6 +123,10 @@ namespace larnest
             LArERElectronYieldsDokeBirksParameters ERElectronYieldsDokeBirksParameters) {
             fER.doke_birks = ERElectronYieldsDokeBirksParameters;
         }
+        void SetAlphaYieldsParameters(
+            LArAlphaYieldsParameters AlphaYieldsParameters) {
+            fAlpha = AlphaYieldsParameters;
+        }
         void SetdEdxParameters(
             LArdEdxParameters dEdxParameters
         ) {
