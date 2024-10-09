@@ -357,7 +357,8 @@ namespace larnest
     )
     {
         // Baller, 2013 JNIST 8 P08005
-        double xi = fBOXParameters.beta * (energy / dx) / efield;
+        // Energy is given in keV for NEST, but xi is calculated with MeV
+        double xi = fBOXParameters.beta * (energy / (dx * 1000)) / efield;
         double recombination_probability = std::max(0.0, log(fBOXParameters.alpha + xi) / xi);
         
         LArYieldResult result;
@@ -378,7 +379,10 @@ namespace larnest
     )
     {
         // Amoruso, et al NIM A 523 (2004) 275
-        double recombination_probability = fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / dx) / efield);
+        // Energy is given in keV for NEST, but xi is calculated with MeV
+        double recombination_probability = (
+            fBIRKSParameters.Ab / (1.0 + fBIRKSParameters.kb * (energy / (dx * 1000)) / efield)
+        );
         
         LArYieldResult result;
         result.TotalYield = 0.0;
