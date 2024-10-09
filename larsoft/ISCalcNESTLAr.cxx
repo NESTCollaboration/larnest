@@ -54,7 +54,21 @@ namespace larg4
 
         // Adjust NEST parameters
         fNESTMode = pset.get<art::InputTag>("nest_mode");
-        std::cout << "NEST Mode: " << fNESTMode << std::endl;
+        larnest::LArNRYieldsParameters NRYieldsParameters;
+        larnest::LArERYieldsParameters ERYieldsParameters;
+        larnest::LArAlphaElectronYieldsParameters AlphaElectronYieldsParameters;
+        larnest::LArAlphaPhotonYieldsParameters AlphaPhotonYieldsParameters;
+        larnest::LArdEdxParameters dEdxParameters;
+        larnest::BOXParameters BOXParameters;
+        larnest::BIRKSParameters BIRKSParameters;
+
+        BOXParameters.alpha = pset.get<Double_t>("nest_box_parameters_alpha");
+        BOXParameters.beta = pset.get<Double_t>("nest_box_parameters_beta");
+        BIRKSParameters.Ab = pset.get<Double_t>("nest_birks_parameters_Ab");
+        BIRKSParameters.kb = pset.get<Double_t>("nest_birks_parameters_kb");
+
+        mLArNEST.SetBOXParameters(BOXParameters);
+        mLArNEST.SetBIRKSParameters(BIRKSParameters);
     }
 
     //----------------------------------------------------------------------------
@@ -69,7 +83,13 @@ namespace larg4
         double EFieldStep = EFieldAtStep(detProp.Efield(), edep);
 
         // Determine species based on calculation mode and particle type
-        larnest::LArInteraction species = larnest::LArInteraction::BOX;
+        larnest::LArInteraction species;
+        if (fNESTMode == "Box") {
+            species = larnest::LArInteraction::BOX;
+        }
+        else {
+            species = larnest::LArInteraction::BIRKS;
+        }
 
         larnest::LArYieldResult yields = mLArNEST.GetYields(
             species, 
